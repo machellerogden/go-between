@@ -1,0 +1,25 @@
+{
+    "name": "go-between",
+    "description": "realtime ranking of user-submitted questions",
+    "contributors": [
+        "Mac Heller-Ogden <mheller-ogden@cars.com>",
+        "Nate Johnson <njohnson@cars.com>"
+    ],
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": "3.4.8",
+        "jade": "1.1.5",
+        "stylus": "0.42.2",
+        "nib": "1.0.2",
+        "underscore": "1.6.0",
+        "async": "0.2.10",
+        "request": "2.34.0",
+        "socket.io": "0.9.16",
+        "moment": "2.5.1"
+    },
+    "engine": "node >= 0.10.26"
+}
