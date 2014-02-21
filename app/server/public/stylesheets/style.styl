@@ -1,4 +1,32 @@
 @import 'nib'
 
+/**
+ * 	variables
+ */
+
+$borderColor = #660
+
+/**
+ * 	styles
+ */
+
 global-reset()
 
+body
+  font-family arial
+  font-size 1em
+
+#questions
+  ol
+    width 100%
+    li
+      border 2px solid $borderColor
+      font-size 1.5em
+      padding 5px
+      margin 5px
+      strong
+        font-size 1.75em
+
+input
+  &[type='text']
+    border 1px solid darken($borderColor, 25)

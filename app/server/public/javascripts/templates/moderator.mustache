@@ -1,1 +1,9 @@
-Moderator
+<ol>
+{{#questions}}
+	<li>
+		<strong>Q.</strong> {{question}}
+		<button name="approve" value="{{id}}">Approve</button>
+		<button name="reject" value="{{id}}">Reject</button>
+	</li>
+{{/questions}}
+</ol>

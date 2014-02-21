@@ -43,4 +43,9 @@ module.exports = function(app) {
         res.render('room', { title: 'go-between', domain: req.roomId });
     });
 
+    // moderator
+    app.get('/moderator', function(req, res) {
+        res.render('moderator', { title: 'go-between - MODERATOR' });
+    });
+
 };
