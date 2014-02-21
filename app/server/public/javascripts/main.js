@@ -1,3 +1,6 @@
+/**
+ * @author Nate Johnson
+ */
 require.config({
     paths : {
         jquery : '/javascripts/libs/jquery-2.1.0.min',
@@ -9,6 +12,6 @@ require.config({
     }
 });
 
-require(['modules/questions'], function(Questions) {
-    new Questions('#questions');
-});
+
+// load the app
+require(['app'], function() {});
