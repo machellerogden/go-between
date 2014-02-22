@@ -1,5 +1,7 @@
 @import 'nib'
 
+@import url(http://fonts.googleapis.com/css?family=Lemon)
+
 /**
  * 	variables
  */
@@ -15,18 +17,32 @@ global-reset()
 body
   font-family arial
   font-size 1em
-
-#questions
-  ol
+  #footer
+    display block
     width 100%
-    li
-      border 2px solid $borderColor
-      font-size 1.5em
-      padding 5px
-      margin 5px
-      strong
-        font-size 1.75em
-
-input
-  &[type='text']
-    border 1px solid darken($borderColor, 25)
+    font-size 10px
+    position absolute
+    bottom 0
+    text-align center
+  #questions
+    ol
+      width 100%
+      li
+        border 2px solid $borderColor
+        margin 5px
+        padding 10px
+        p
+          font-family 'Lemon', cursive
+          font-size 1.5em
+        .options
+          float right
+  #question
+    width 100%
+    position absolute
+    bottom 10
+    height 140px
+    margin 5px
+    textarea
+      border 1px solid darken($borderColor, 25)
+      width 99%
+      height 100px

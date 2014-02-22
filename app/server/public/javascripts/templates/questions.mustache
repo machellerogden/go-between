@@ -1,12 +1,12 @@
 <ol>
 {{#questions}}
-	<li>
-	    <strong>Q.</strong> {{question}}
+    <li>
+	    <span class="options">
+    	    <a href="#{{id}}" class="like">Like</a>
+	    </span>
+	    <p>{{question}}</p>
 	</li>
 {{/questions}}
 </ol>
 
-<form>
-    <input type="text" name="question" value="" />
-    <button>Submit</button>
-</form>
+{{>//templates/question.mustache}}

@@ -1,9 +1,13 @@
+<h2>Moderator</h2>
 <ol>
 {{#questions}}
 	<li>
-		<strong>Q.</strong> {{question}}
-		<button name="approve" value="{{id}}">Approve</button>
-		<button name="reject" value="{{id}}">Reject</button>
+		{{question}}
+		<form>
+		    <input type="hidden" name="id" value="{{id}}" />
+			<button name="approve">Approve</button>
+			<button name="reject">Reject</button>
+		</form>
 	</li>
 {{/questions}}
 </ol>
