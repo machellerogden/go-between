@@ -2,7 +2,8 @@ define(['can', 'domReady!'], function(can) {
     return can.Control.extend({
         defaults : {
             view : '/javascripts/templates/questions.mustache',
-            questions : null
+            questions : null,
+            characterLimit : 250
         }
     }, {
         init : function(el, op) {
@@ -16,8 +17,11 @@ define(['can', 'domReady!'], function(can) {
                 answered : false
             }]);
 
+            op.count = can.compute(op.characterLimit);
+
             el.html(can.view(op.view, {
-                questions : op.questions
+                questions : op.questions,
+                count : op.count
             }));
         },
         'form submit' : function(el, ev) {
@@ -30,6 +34,12 @@ define(['can', 'domReady!'], function(can) {
             });
 
             $(el).find('[name=question]').val('');
+        },
+        '[name=question] keyup' : function(el, ev) {
+            this.options.count(this.options.characterLimit - el.val().length);
+        },
+        '[name=question] change' : function(el, ev) {
+            this.options.count(this.options.characterLimit);
         }
     });
 });
