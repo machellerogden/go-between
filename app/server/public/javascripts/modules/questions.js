@@ -8,10 +8,12 @@ define(['can', 'domReady!'], function(can) {
     }, {
         init : function(el, op) {
             op.questions = new can.List([{
+                id : 1,
                 question : 'What weighs more, a ton of bricks or a ton of feathers?',
                 votes : 123,
                 answered : false
             }, {
+                id : 2,
                 question : "What color is George Washington's white horse?",
                 votes : 2,
                 answered : false
@@ -28,6 +30,7 @@ define(['can', 'domReady!'], function(can) {
             ev.preventDefault();
 
             this.options.questions.push({
+                id : 3,
                 question : $(el).find('[name=question]').val(),
                 votes : 0,
                 answered : false
@@ -40,6 +43,11 @@ define(['can', 'domReady!'], function(can) {
         },
         '[name=question] change' : function(el, ev) {
             this.options.count(this.options.characterLimit);
+        },
+        '.like click' : function(el, ev) {
+            ev.preventDefault();
+            // TODO
+            console.log('like clicked', el.attr('href'));
         }
     });
 });
