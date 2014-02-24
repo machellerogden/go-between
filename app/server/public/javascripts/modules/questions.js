@@ -17,8 +17,11 @@ define(['can', 'domReady!'], function(can) {
                 op.questions.attr(data, true);
             });
 
+            socket.on('connect', function() {
+                socket.emit('connected');
+            });
+
             socket.on('connected', function(data) {
-                console.log('connected', data);
                 op.questions.attr(data, true);
             });
 

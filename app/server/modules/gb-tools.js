@@ -24,11 +24,9 @@ var _ = require('underscore'),
 /**
  * Connect to...
  */
-gbTools.connect = function() {
+gbTools.connected = function() {
     var socket = this;
     socket.connected = true;
-
-    console.log('connected');
 
     // TODO wire-up mongoDB
     socket.emit('connected', questions);
@@ -58,8 +56,6 @@ gbTools.post = function(question) {
  */
 gbTools.like = function(id) {
     var socket = this;
-
-    console.log('will like', id);
 
     for (var i=0; i<questions.length; i++) {
         if (questions[i].id == id) {
