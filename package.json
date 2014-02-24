@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "express": "3.4.8",
+    "connect": "2.13.0",
+    "cookie": "0.1.1",
     "jade": "1.1.5",
     "stylus": "0.42.2",
     "nib": "1.0.2",
