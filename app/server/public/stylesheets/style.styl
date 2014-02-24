@@ -1,12 +1,13 @@
 @import 'nib'
 
-@import url('http://fonts.googleapis.com/css?family=Lemon|Roboto')
+@import url('http://fonts.googleapis.com/css?family=Maven+Pro:400,900|Roboto')
 
 /**
  * 	variables
  */
 
-$borderColor = #660
+$borderColor = #7b2b84
+$questionFont = 'Maven Pro', sans-serif
 $baseFont = 'Roboto', sans-serif
 
 /**
@@ -34,8 +35,9 @@ body
         padding 10px
         min-height 55px
         p
-          font-family 'Lemon', cursive
+          font-family $questionFont
           font-size 1.5em
+          font-weight bold
         .options
           float right
           font-size 0.8em
