@@ -1,4 +1,78 @@
 @import 'nib'
 
+@import url('http://fonts.googleapis.com/css?family=Lemon|Roboto')
+
+/**
+ * 	variables
+ */
+
+$borderColor = #660
+$baseFont = 'Roboto', sans-serif
+
+/**
+ * 	styles
+ */
+
 global-reset()
 
+body
+  font-family $baseFont
+  font-size 1em
+  #footer
+    display block
+    width 100%
+    font-size 10px
+    position absolute
+    bottom 0
+    text-align center
+  #questions
+    ol
+      width 100%
+      li
+        border 2px solid $borderColor
+        margin 5px
+        padding 10px
+        min-height 55px
+        p
+          font-family 'Lemon', cursive
+          font-size 1.5em
+        .options
+          float right
+          font-size 0.8em
+          .like
+            display block
+            text-indent -9999px
+            background-image url('/images/like.svg')
+            background-repeat no-repeat
+            background-size 40px 40px
+            height 45px
+            width 45px
+            white-space nowrap
+            margin 0 auto 2px auto
+            &:hover
+              background-size 45px 45px
+  #question
+    width 100%
+    position absolute
+    bottom 10
+    height 140px
+    margin 5px
+    textarea
+      border 1px solid darken($borderColor, 25)
+      width 99%
+      height 100px
+      font-family $baseFont
+    .buttons
+      float left
+      [type='submit']
+        font-weight bold
+      [type='reset']
+        font-size .7em
+    .count
+      float right
+      font-size .75em
+      margin-top 5px
+      margin-right 15px
+
+strong
+  font-weight bold
