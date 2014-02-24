@@ -1,12 +1,13 @@
 @import 'nib'
 
-@import url(http://fonts.googleapis.com/css?family=Lemon)
+@import url('http://fonts.googleapis.com/css?family=Lemon|Roboto')
 
 /**
  * 	variables
  */
 
 $borderColor = #660
+$baseFont = 'Roboto', sans-serif
 
 /**
  * 	styles
@@ -15,7 +16,7 @@ $borderColor = #660
 global-reset()
 
 body
-  font-family arial
+  font-family $baseFont
   font-size 1em
   #footer
     display block
@@ -60,6 +61,7 @@ body
       border 1px solid darken($borderColor, 25)
       width 99%
       height 100px
+      font-family $baseFont
     .buttons
       float left
       [type='submit']

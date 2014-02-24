@@ -1,4 +1,6 @@
 define(['can', 'domReady!'], function(can) {
+    var socket;
+
     return can.Control.extend({
         defaults : {
             view : '/javascripts/templates/questions.mustache',
@@ -7,17 +9,18 @@ define(['can', 'domReady!'], function(can) {
         }
     }, {
         init : function(el, op) {
-            op.questions = new can.List([{
-                id : 1,
-                question : 'What weighs more, a ton of bricks or a ton of feathers?',
-                votes : 123,
-                answered : false
-            }, {
-                id : 2,
-                question : "What color is George Washington's white horse?",
-                votes : 2,
-                answered : false
-            }]);
+            op.questions = new can.List([]);
+
+            socket = io.connect('/gb');
+
+            socket.on('posted', function(data) {
+                op.questions.attr(data, true);
+            });
+
+            socket.on('connected', function(data) {
+                console.log('connected', data);
+                op.questions.attr(data, true);
+            });
 
             op.count = can.compute(op.characterLimit);
 
@@ -28,13 +31,11 @@ define(['can', 'domReady!'], function(can) {
         },
         'form submit' : function(el, ev) {
             ev.preventDefault();
+            // this.options.questions.push(question);
 
-            this.options.questions.push({
-                id : 3,
-                question : $(el).find('[name=question]').val(),
-                votes : 0,
-                answered : false
-            });
+            if ($(el).find('[name=question]').val()) {
+                socket.emit('post', $(el).find('[name=question]').val());
+            }
 
             $(el).find('[name=question]').val('');
         },
@@ -46,8 +47,7 @@ define(['can', 'domReady!'], function(can) {
         },
         '.like click' : function(el, ev) {
             ev.preventDefault();
-            // TODO
-            console.log('like clicked', el.attr('href'));
+            socket.emit('like', el.attr('href').replace('#', ''));
         }
     });
 });
