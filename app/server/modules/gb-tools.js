@@ -48,7 +48,6 @@ gbTools.post = function(question) {
     });
 
     socket.emit('posted', questions);
-    // socket.broadcast.emit('posted', questions);
 };
 
 /**
@@ -64,7 +63,17 @@ gbTools.like = function(id) {
             break;
         }
     }
+    socket.emit('posted', questions);
+};
 
+gbTools.update = function(data) {
+    var socket = this;
+    console.log('update', data);
+    socket.emit('posted', questions);
+};
+
+var postback = function() {
+    var socket = this;
     socket.emit('posted', questions);
     // socket.broadcast.emit('posted', questions);
 };

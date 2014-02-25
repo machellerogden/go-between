@@ -11,6 +11,7 @@ module.exports = function(){
         socket.on('connected', gbTools.connected);
         socket.on('post', gbTools.post);
         socket.on('like', gbTools.like);
+        socket.on('update', gbTools.update);
         socket.on('disconnect', gbTools.disconnect);
     });
 
