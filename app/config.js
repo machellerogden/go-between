@@ -9,28 +9,6 @@ module.exports = function(app) {
     // global session store
     global.sessionStore = new connect.session.MemoryStore();
 
-    // io configuration
-    global.io.set('log level', 1);
-    global.io.set('transports', [ 'websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
-    global.io.set('authorization', function (data, accept) {
-        if (!data.headers.cookie) {
-            return accept('Session cookie required.', false);
-        }
-        data.cookie = cookie.parseCookie(data.headers.cookie);
-        data.cookie = cookie.parseSignedCookies(data.cookie, 'f1$ZOxIEi7*SDuzc');
-        data.sessionID = data.cookie['express.sid'];
-        global.sessionStore.get(data.sessionID, function (err, session) {
-            if (err) {
-                return accept('Error in session store.', false);
-            } else if (!session) {
-                return accept('Session not found.', false);
-            }
-            // success! we're authenticated with a known session.
-            data.session = session;
-            return accept(null, true);
-        });
-    });
-
     // app configuration
     app.configure(function(){
         app.set('port', process.env.PORT || 8080);
@@ -62,4 +40,24 @@ module.exports = function(app) {
         app.use(express.errorHandler());
     });
 
+    // io configuration
+    global.io.set('log level', 1);
+    global.io.set('transports', [ 'websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
+    global.io.set('authorization', function (data, accept) {
+        if (!data.headers.cookie) {
+            return accept('Session cookie required.', false);
+        }
+        data.cookie = cookie.parse(data.headers.cookie);
+        data.sessionID = connect.utils.parseSignedCookie(data.cookie['express.sid'], 'f1$ZOxIEi7*SDuzc');
+        global.sessionStore.get(data.sessionID, function (err, session) {
+            if (err) {
+                return accept('Error in session store.', false);
+            } else if (!session) {
+                return accept('Session not found.', false);
+            }
+            // success! we're authenticated with a known session.
+            data.session = session;
+            return accept(null, true);
+        });
+    });
 };
