@@ -14,5 +14,4 @@ module.exports = function(){
         socket.on('update', gbTools.update);
         socket.on('disconnect', gbTools.disconnect);
     });
-
 }();

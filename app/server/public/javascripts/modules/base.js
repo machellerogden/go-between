@@ -1,26 +1,24 @@
 define(['can', 'domReady!'], function(can) {
+    var _this;
     return can.Control.extend({
         defaults : {
             questions : null
         }
     }, {
         init : function(el, op) {
+            _this = this;
+
             op.questions = new can.List([]);
 
-            this.socket = io.connect('/gb');
+            _this.socket = io.connect('/gb');
 
-            this.socket.on('connect', function() {
-                console.debug('connect');
-                this.socket.emit('connected');
+            _this.socket.on('connect', function() {
+                setTimeout(function() { // hack!!!
+                    _this.socket.emit('connected');
+                }, 10);
             });
 
-            this.socket.on('connected', function(data) {
-                console.debug('connected', data);
-                op.questions.attr(data, true);
-            });
-
-            this.socket.on('posted', function(data) {
-                console.debug('posted', data);
+            _this.socket.on('posted', function(data) {
                 op.questions.attr(data, true);
             });
         }

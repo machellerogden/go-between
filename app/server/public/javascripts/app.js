@@ -3,6 +3,12 @@
  */
 
 require(['modules/questions', 'modules/moderator'], function(Questions, Moderator) {
-    new Questions('#questions');
-    new Moderator('#moderator');
+
+    $('#questions').each(function(i, el) {
+        new Questions(el);
+    });
+
+    $('#moderator').each(function(i, el) {
+        new Moderator(el);
+    });
 });

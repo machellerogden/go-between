@@ -9,39 +9,33 @@ var _ = require('underscore'),
     dns = require('dns'),
     moment = require('moment'),
     gbTools = {},
-    questions = [{
-        id : 0,
-        question : 'What weighs more, a ton of bricks or a ton of feathers?',
-        votes : 123,
-        answered : false
-    }, {
+    questions = [{  // fixture
         id : 1,
+        question : 'Which weighs more, a ton of bricks or a ton of feathers?',
+        votes : 123,
+        answered : false,
+        status : 'pending'
+    }, {
+        id : 2,
         question : "What color is George Washington's white horse?",
         votes : 2,
-        answered : false
+        answered : false,
+        status : 'approved'
     }];
 
-/**
- * Connect to...
- */
 gbTools.connected = function() {
     var socket = this;
     socket.connected = true;
 
     // TODO wire-up mongoDB
-    socket.emit('connected', questions);
+    socket.emit('posted', questions);
 };
 
-/**
- * Post new question
- *
- * @param {Object} question
- */
 gbTools.post = function(question) {
     var socket = this;
     // TODO wire-up mongoDB
     questions.push({
-        id : questions.length,
+        id : questions.length + 1,
         question : question,
         votes : 1,
         answered : false
@@ -50,9 +44,6 @@ gbTools.post = function(question) {
     socket.emit('posted', questions);
 };
 
-/**
- * Like question
- */
 gbTools.like = function(id) {
     var socket = this;
 
@@ -70,17 +61,9 @@ gbTools.update = function(data) {
     var socket = this;
     console.log('update', data);
     socket.emit('posted', questions);
-};
-
-var postback = function() {
-    var socket = this;
-    socket.emit('posted', questions);
     // socket.broadcast.emit('posted', questions);
 };
 
-/**
- * Disconnect from...
- */
 gbTools.disconnect = function() {
     var socket = this;
     socket.connected = false;

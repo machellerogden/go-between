@@ -21,7 +21,7 @@ define(['can', 'modules/base', 'can/construct/super', 'domReady!'], function(can
             // this.options.questions.push(question);
 
             if ($(el).find('[name=question]').val()) {
-                this.socket.emit('post', $(el).find('[name=question]').val());
+                this.socket.emit('post', $(el).find('[name=question]').val().trim());
             }
 
             $(el).find('[name=question]').val('');
