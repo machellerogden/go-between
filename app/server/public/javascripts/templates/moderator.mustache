@@ -2,12 +2,11 @@
 <ol>
 {{#questions}}
 	<li>
-		{{question}}
-		<form>
-		    <input type="hidden" name="id" value="{{id}}" />
-			<button name="approve">Approve</button>
-			<button name="reject">Reject</button>
-		</form>
+	    <span class="options">
+    		<button value="{{id}}">Approve</button>
+    		<button value="{{id}}">Reject</button>
+    	</span>
+		<p>"{{question}}"</p>
 	</li>
 {{/questions}}
 </ol>

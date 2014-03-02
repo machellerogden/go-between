@@ -1,29 +1,13 @@
-define(['can', 'domReady!'], function(can) {
-    var socket;
+define(['can', 'modules/base', 'can/construct/super', 'domReady!'], function(can, base) {
 
-    return can.Control.extend({
+    return base({
         defaults : {
-            view : '/javascripts/templates/questions.mustache',
-            questions : null,
+            view : '/javascripts/templates/questions',
             characterLimit : 250
         }
     }, {
         init : function(el, op) {
-            op.questions = new can.List([]);
-
-            socket = io.connect('/gb');
-
-            socket.on('posted', function(data) {
-                op.questions.attr(data, true);
-            });
-
-            socket.on('connect', function() {
-                socket.emit('connected');
-            });
-
-            socket.on('connected', function(data) {
-                op.questions.attr(data, true);
-            });
+            this._super(el, op);
 
             op.count = can.compute(op.characterLimit);
 
@@ -37,7 +21,7 @@ define(['can', 'domReady!'], function(can) {
             // this.options.questions.push(question);
 
             if ($(el).find('[name=question]').val()) {
-                socket.emit('post', $(el).find('[name=question]').val());
+                this.socket.emit('post', $(el).find('[name=question]').val().trim());
             }
 
             $(el).find('[name=question]').val('');
@@ -50,7 +34,7 @@ define(['can', 'domReady!'], function(can) {
         },
         '.like click' : function(el, ev) {
             ev.preventDefault();
-            socket.emit('like', el.attr('href').replace('#', ''));
+            this.socket.emit('like', el.attr('href').replace('#', ''));
         }
     });
 });
