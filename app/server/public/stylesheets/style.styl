@@ -1,31 +1,35 @@
-@import 'nib'
-
-@import url('http://fonts.googleapis.com/css?family=Maven+Pro:400,900|Roboto')
-
-/**
- * 	variables
- */
-
-$borderColor = #7b2b84
-$questionFont = 'Maven Pro', sans-serif
-$baseFont = 'Roboto', sans-serif
-
-/**
- * 	styles
- */
-
-global-reset()
+@import url("http://fonts.googleapis.com/css?family=Maven+Pro:400,900|Roboto");
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
+  margin 0
+  padding 0
+  border 0
+  outline 0
+  font-weight inherit
+  font-style inherit
+  font-family inherit
+  font-size 100%
+  vertical-align baseline
 
 body
-  h1
-    background-image url('http://graphics.cars.com/images/core/logo.png')
-    background-repeat no-repeat
-    background-size 231px 98px
-    padding-left 235px
-    height 100px
-    font-size 1.5em
-  font-family $baseFont
+  line-height 1
+  color #000
+  background #fff
+  color #333333
+  font-family 'Helvetica Neue','Helvetica','Arial',sans-serif
   font-size 1em
+  padding 20px 40px
+  h1
+    background-image url("http://graphics.cars.com/images/core/logo.png")
+    background-repeat no-repeat
+    -webkit-background-size 231px 98px
+    -moz-background-size 231px 98px
+    background-size 231px 98px
+    color #7B2B83
+    padding 33px 0 0 245px
+    height 100px
+    font-size 1.9em
+    font-style italic
+    font-weight bold
   #footer
     display block
     width 100%
@@ -33,55 +37,101 @@ body
     position absolute
     bottom 0
     text-align center
-  #questions, #moderator
-    ol
-      width 100%
-      li
-        border 2px solid $borderColor
-        margin 5px
-        padding 10px
-        min-height 55px
-        p
-          font-family $questionFont
-          font-size 1.5em
-          font-weight bold
-        .options
-          float right
-          font-size 0.8em
-          .like
-            display block
-            text-indent -9999px
-            background-image url('/images/like.svg')
-            background-repeat no-repeat
-            background-size 40px 40px
-            height 45px
-            width 45px
-            white-space nowrap
-            margin 0 auto 2px auto
-            &:hover
-              background-size 45px 45px
+    padding 16px 0
   #question
     width 100%
     position absolute
-    bottom 10
+    bottom 32
     height 140px
-    margin 5px
     textarea
-      border 1px solid darken($borderColor, 25)
-      width 99%
+      border 1px solid #95A1AA
+      width 75%
       height 100px
-      font-family $baseFont
+      margin-bottom 8px
     .buttons
       float left
+      button
+        -webkit-appearance none
+        -webkit-appearance none
+        -moz-appearance none
+        appearance none
+        -webkit-border-radius 5px
+        border-radius 5px
+        cursor pointer
+        display inline-block
+        line-height normal
+        margin 0
+        padding 7px 15px 6px
       [type='submit']
+        color #ffffff
         font-weight bold
+        background-color #93A445
+        border 1px solid #93a533
       [type='reset']
-        font-size .7em
+        color #5c707c
+        background-color #eef1f3
+        border 1px solid #e1e1e1
     .count
-      float right
+      color #5C707C
       font-size .75em
-      margin-top 5px
-      margin-right 15px
+      display inline-block
+      margin 8px 0 0 8px
+
+ol,ul
+  list-style none
+
+table
+  border-collapse separate
+  border-spacing 0
+  vertical-align middle
+
+caption,th,td
+  text-align left
+  font-weight normal
+  vertical-align middle
+
+a
+  img
+    border none
+
+body #questions ol,body #moderator ol
+  width 79%
+
+body #questions ol li,body #moderator ol li
+  border 1px solid #C7D3D7
+  margin 0 0 16px 0
+  padding 10px
+  min-height 55px
+  -webkit-border-radius 5px
+  border-radius 5px
+
+body #questions ol li p,body #moderator ol li p
+  font-size 1.5em
+  margin 13px 0 0 60px
+
+body #questions ol li .options,body #moderator ol li .options
+  color #0C92FF
+  float left
+  font-size .8em
+
+body #questions ol li .options .like,body #moderator ol li .options .like
+  display block
+  text-indent -9999px
+  background-image url("/images/like.svg")
+  background-repeat no-repeat
+  -webkit-background-size 40px 40px
+  -moz-background-size 40px 40px
+  background-size 40px 40px
+  height 45px
+  width 45px
+  white-space nowrap
+  margin 0 auto 2px auto
+
+body #questions ol li .options .like:hover,body #moderator ol li .options .like:hover
+  -webkit-background-size 45px 45px
+  -moz-background-size 45px 45px
+  background-size 45px 45px
 
 strong
   font-weight bold
+
