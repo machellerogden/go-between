@@ -1,13 +1,18 @@
 module.exports = function(app) {
 
+    const KEY = 'express.sid',
+          SECRET = 'express';
+
     var express = require('express'),
-        connect = require('connect'),
         stylus = require('stylus'),
         nib = require('nib'),
-        cookie = require('cookie');
+        cookie = express.cookieParser(SECRET);
 
     // global session store
-    global.sessionStore = new connect.session.MemoryStore();
+    global.sessionStore = new express.session.MemoryStore();
+
+    // global session store
+    global.session = express.session({ secret: SECRET, key: KEY, store: sessionStore });
 
     // app configuration
     app.configure(function(){
@@ -18,8 +23,8 @@ module.exports = function(app) {
         app.use(express.logger('dev'));
         app.use(express.bodyParser());
         app.use(express.methodOverride());
-        app.use(express.cookieParser('f1$ZOxIEi7*SDuzc'));
-        app.use(express.session({ key: 'express.sid', store: global.sessionStore }));
+        app.use(cookie);
+        app.use(session);
         app.use(app.router);
         app.use(stylus.middleware({
             src: app.root + '/app/server/public',
@@ -32,6 +37,14 @@ module.exports = function(app) {
                     .use(nib());
             }
         }));
+        app.use(function noCachePlease(req, res, next) {
+            if (req.url === '/') {
+                res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+                res.header("Pragma", "no-cache");
+                res.header("Expires", 0);
+            }
+            next();
+        });
         app.use(express.static(app.root + '/app/server/public'));
     });
 
@@ -42,22 +55,24 @@ module.exports = function(app) {
 
     // io configuration
     global.io.set('log level', 1);
-    global.io.set('transports', [ 'websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
-    global.io.set('authorization', function (data, accept) {
-        if (!data.headers.cookie) {
-            return accept('Session cookie required.', false);
-        }
-        data.cookie = cookie.parse(data.headers.cookie);
-        data.sessionID = connect.utils.parseSignedCookie(data.cookie['express.sid'], 'f1$ZOxIEi7*SDuzc');
-        global.sessionStore.get(data.sessionID, function (err, session) {
-            if (err) {
-                return accept('Error in session store.', false);
-            } else if (!session) {
-                return accept('Session not found.', false);
+    global.io.set('transports', [ /*'websocket', 'flashsocket', 'htmlfile', */ 'xhr-polling', 'jsonp-polling']);
+    /*
+    global.io.set('authorization', function(data, accept) {
+      cookie(data, {}, function(err) {
+        if (!err) {
+          var sessionID = data.signedCookies[KEY];
+          global.sessionStore.get(sessionID, function(err, session) {
+            if (err || !session) {
+              accept(null, false);
+            } else {
+              data.session = session;
+              accept(null, true);
             }
-            // success! we're authenticated with a known session.
-            data.session = session;
-            return accept(null, true);
-        });
+          });
+        } else {
+          accept(null, false);
+        }
+      });
     });
+    */
 };
